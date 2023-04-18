@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Juego de Adivinación</title>
+</head>
+
+<body>
+  <h1>Juego de Adivinación</h1>
+
+  <script>
+    // Definimos la función para imprimir saltos de línea en el HTML
+    function saltarLinea() {
+      document.write("<br>");
+      document.write("<br>");
+      document.write("<br>");
+    }
+
+ // Generar número aleatorio entre 1 y 10
+const randomNumber = Math.floor(Math.random() * 10) + 1;
+
+// Inicializar el número de intentos restantes en 3
+let remainingGuesses = 3;
+
+// Agregar event listener al botón de envío
+document.getElementById("submit").addEventListener("click", function () {
+  // Obtener valor del campo de entrada
+  const guess = document.getElementById("guess").value;
+
+  // Restar un intento al número de intentos restantes
+  remainingGuesses--;
+
+  // Si la respuesta es correcta, mostrar mensaje de éxito
+  if (guess == randomNumber) {
+    document.getElementById("result").textContent = "¡Correcto!";
+  }
+  // Si la respuesta es incorrecta y aún quedan intentos, mostrar mensaje de error y cuántos intentos quedan
+  else if (remainingGuesses > 0) {
+    document.getElementById("result").textContent = `Incorrecto. Te quedan ${remainingGuesses} intentos`;
+  }
+  // Si la respuesta es incorrecta y ya no quedan intentos, mostrar mensaje de fracaso y desactivar el botón de envío
+  else {
+    document.getElementById("result").textContent = `Perdiste. El número era ${randomNumber}`;
+    document.getElementById("submit").disabled = true;
+  }
+});
+
+  </script>
+</body>
+
+</html>
