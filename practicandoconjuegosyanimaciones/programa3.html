@@ -1,0 +1,44 @@
+<!-- Creamos un canvas para dibujar los círculos -->
+<canvas id="lienzo" width="600" height="400"></canvas>
+
+<script>
+  // Obtenemos el canvas y su contexto
+  var canvas = document.getElementById("lienzo");
+  var ctx = canvas.getContext("2d");
+
+  // Establecemos el color de fondo del canvas
+  ctx.fillStyle = "grey";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Creamos un array de colores y un índice para el color actual
+  var colors = ["blue", "red", "green"];
+  var currentColorIndex = 0;
+
+  // Manejamos el evento de clic en el canvas
+  canvas.onclick = function (event) {
+    // Obtenemos las coordenadas del clic
+    var x = event.pageX - canvas.offsetLeft;
+    var y = event.pageY - canvas.offsetTop;
+
+    // Obtenemos el color actual del array de colores
+    var currentColor = colors[currentColorIndex];
+
+    // Dibujamos un círculo en las coordenadas con el color actual
+    ctx.fillStyle = currentColor;
+    ctx.beginPath();
+    ctx.arc(x, y, 10, 0, 2 * Math.PI);
+    ctx.fill();
+
+    // Incrementamos el índice de color actual y lo mantenemos dentro de los límites del array de colores
+    currentColorIndex = (currentColorIndex + 1) % colors.length;
+  };
+
+  // Manejamos el evento de clic derecho en el canvas
+  canvas.oncontextmenu = function () {
+    // Incrementamos el índice de color actual y lo mantenemos dentro de los límites del array de colores
+    currentColorIndex = (currentColorIndex + 1) % colors.length;
+
+    // Devolvemos false para evitar que aparezca el menú contextual
+    return false;
+  };
+</script>
